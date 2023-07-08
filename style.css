@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  .form-container {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="number"] {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    padding: 10px;
+  }
+  
+  #summary-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 20px;
+  }
+  
+  #summary-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  #summary-list li {
+    margin-bottom: 5px;
+  }
+
+  #transactions-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  #transactions-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  #transactions-table th,
+  #transactions-table td {
+    padding: 8px;
+    border: 1px solid #ccc;
+  }
+  
+  #transactions-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-align: left;
+  }
+  
+  #transactions-table td {
+    text-align: center;
+  }
+  
