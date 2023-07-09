@@ -74,39 +74,22 @@ displayTransactions(transactions);
 
 // Create a new Transaction and display the summary
 function createTransaction(event) {
-  event.preventDefault();
-  const expenseInput = document.getElementById('expense');
-  const totalAmountInput = document.getElementById('totalAmount');
-  const spenderInput = document.getElementById('spender');
-  const consumersInput = document.getElementById('consumers');
-  const customSplitInput = document.getElementById('customSplit');
-  if (!expenseInput.checkValidity() ||
-      !totalAmountInput.checkValidity() ||
-      !spenderInput.checkValidity() ||
-      !consumersInput.checkValidity() || 
-      !customSplitInput.checkValidity()) {
+  const expense = document.getElementById('expense').value;
+  const totalAmount = parseFloat(document.getElementById('totalAmount').value);
+  const spender = document.getElementById('spender').value;
+  const consumers = document.getElementById('consumers').value.split(',');
+  var customSplit = document.getElementById('customSplit').value.split(',').map(i=>Number(i));
+  if (!validateInput(expense, totalAmount, spender, consumers)) {
     return;
   }
-  const expense = expenseInput.value;
-  const totalAmount = parseFloat(totalAmountInput.value);
-  const spender = spenderInput.value;
-  const consumers = consumersInput.value.split(',');
-  var customSplit;
-  if(customSplitInput.value === ""){
+  if(customSplit.length === 1 && customSplit[0] === 0){
     customSplit = [];
-  }else{
-    customSplit = customSplitInput.value.split(',').map(i=>Number(i));
   }
-
   console.log(expense,totalAmount, spender, consumers, customSplit);
   var transaction = new Transaction(expense, totalAmount, spender, consumers, customSplit);
   transactions.push(transaction);
   displayTransactions(transactions);
-  expenseInput.value = '';
-  totalAmountInput.value = '';
-  spenderInput.value = '';
-  consumersInput.value = '';
-  customSplitInput.value = '';
+  document.getElementById("transaction-form").reset();
 }
 
 
