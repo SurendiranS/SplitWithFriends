@@ -93,6 +93,16 @@ function createTransaction(event) {
 }
 
 
+// Validate form inputs
+function validateInput(expense, totalAmount, spender, consumers) {
+  if (expense === '' || totalAmount === '' || isNaN(totalAmount) || spender === '' || (consumers.length === 1 && consumers[0] === "")) {
+    alert('Please fill in all the required fields and ensure data types are correct.');
+    return false;
+  }
+  return true;
+}
+
+
 // Display the transactions in the HTML table
 function displayTransactions(transactions) {
   const transactionsBody = document.getElementById('transactions-body');
