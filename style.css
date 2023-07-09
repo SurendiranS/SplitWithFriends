@@ -67,4 +67,41 @@ body {
   #transactions-table td {
     text-align: center;
   }
-  
+ 
+
+ /* Dark theme */
+html {
+    background-color: #0e0e10 !important;
+    color-scheme: dark !important;
+}
+
+html, body {
+    background-color: #0e0e10;
+    border-color: #8b8146;
+    color: #dcd7ba;
+}
+a {
+    color: #3391ff;
+}
+table {
+    border-color: #53535f;
+}
+::placeholder {
+    color: #c0b682;
+}
+
+/* Modified CSS */
+#summary-container {
+    border-color: rgb(62, 62, 71);
+}
+#transactions-container {
+    border-color: rgb(62, 62, 71);
+}
+#transactions-table th,
+#transactions-table td {
+    border-color: rgb(62, 62, 71);
+}
+#transactions-table th {
+    background-color: rgb(22, 22, 25);
+}
+
