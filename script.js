@@ -42,11 +42,12 @@ class DB {
 class Transaction {
   static db = new DB();
   constructor(expense, totalAmount, spender, consumers, customSplit = []) {
+    this.expense = expense;
+    this.totalAmount = totalAmount;
     this.spender = spender;
     this.consumers = consumers;
-    this.totalAmount = totalAmount;
-    this.expense = expense;
     this.customSplit = customSplit;
+    this.split = 0;
     if (customSplit.length === 0) {
       for (const consumer of consumers) {
         Transaction.db.insert(spender, consumer, totalAmount / (consumers.length + 1));
@@ -108,12 +109,14 @@ function displayTransactions(transactions) {
   const transactionsBody = document.getElementById('transactions-body');
   transactionsBody.innerHTML = '';
   transactions.forEach((transaction) => {
+    var split = transaction.customSplit.length === 0 ? transaction.split : transaction.customSplit;
   const row = document.createElement('tr');
   row.innerHTML = `
     <td>${transaction.expense}</td>
     <td>${transaction.totalAmount}</td>
     <td>${transaction.spender}</td>
     <td>${transaction.consumers.join(', ')}</td>
+    <td>${split}</td>
   `;
   transactionsBody.appendChild(row);
 });
@@ -132,3 +135,56 @@ function displaySummary(summary) {
   });
   console.log(transactions[0].getSummary())
 }
+
+
+function csvMaker(data) {
+  csvRows = [];
+  const headers = Object.keys(data[0]);
+  csvRows.push(headers.join(';'));
+  data.forEach(obj => {
+    const values = Object.values(obj).join(';');
+    csvRows.push(values);
+  });
+  return csvRows.join('\n');
+}
+
+function download(data) {
+  const blob = new Blob([data], { type: 'text/csv' });
+  const url = window.URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.setAttribute('href', url)
+  a.setAttribute('download', 'download.csv');
+  a.click()
+}
+
+
+function upload(data){
+  rows = data.trim().split('\n');
+  for (let index = 1; index < rows.length; index++) {
+    const row = rows[index].split(';');
+    const expense = row[0];
+    const totalAmount = parseFloat(row[1]);
+    const spender = row[2];
+    const consumers = row[3].split(',');
+    var customSplit = row[4].split(',').map(i=>Number(i));
+    if(customSplit.length === 1 && customSplit[0] === 0){
+      customSplit = [];
+    }
+    // console.log(expense,totalAmount,spender,consumers,customSplit);
+    var n = new Transaction(expense, totalAmount, spender, consumers, customSplit);
+    console.log(n)
+    transactions.push(n);
+  }
+  displayTransactions(transactions);
+}
+
+function openFile(event) {
+  var input = event.target;
+  var reader = new FileReader();
+  reader.onload = function() {
+    var text = reader.result;
+    console.log(reader.result.substring(0, 200));
+    upload(reader.result);
+  };
+  reader.readAsText(input.files[0]);
+};
