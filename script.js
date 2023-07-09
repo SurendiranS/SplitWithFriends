@@ -25,11 +25,11 @@ class DB {
       if (this.db[i] !== 0) {
         if (this.db[i] < 0) {
           const [spender, consumer] = i.split('*');
-          const amount = this.db[i] * -1;
+          const amount = Math.round(((this.db[i] * -1) + Number.EPSILON) * 100) / 100;
           summary.push(`${spender} pays ${consumer} Rs ${amount}`);
         } else {
           const [consumer, spender] = i.split('*');
-          const amount = this.db[i];
+          const amount = Math.round((this.db[i] + Number.EPSILON) * 100) / 100;
           summary.push(`${spender} pays ${consumer} Rs ${amount}`);
         }
       }
@@ -49,8 +49,9 @@ class Transaction {
     this.customSplit = customSplit;
     this.split = 0;
     if (customSplit.length === 0) {
+      this.split = Math.round(( (totalAmount / (consumers.length + 1)) + Number.EPSILON) * 100) / 100
       for (const consumer of consumers) {
-        Transaction.db.insert(spender, consumer, totalAmount / (consumers.length + 1));
+        Transaction.db.insert(spender, consumer, this.split);
       }
     } else {
       for (let i = 0; i < consumers.length; i++) {
@@ -86,7 +87,7 @@ function createTransaction(event) {
   if(customSplit.length === 1 && customSplit[0] === 0){
     customSplit = [];
   }
-  console.log(expense,totalAmount, spender, consumers, customSplit);
+  // console.log(expense,totalAmount, spender, consumers, customSplit);
   var transaction = new Transaction(expense, totalAmount, spender, consumers, customSplit);
   transactions.push(transaction);
   displayTransactions(transactions);
@@ -109,7 +110,7 @@ function displayTransactions(transactions) {
   const transactionsBody = document.getElementById('transactions-body');
   transactionsBody.innerHTML = '';
   transactions.forEach((transaction) => {
-    var split = transaction.customSplit.length === 0 ? transaction.split : transaction.customSplit;
+    var split = transaction.customSplit.length === 0 ? transaction.split + ' / Person' : transaction.customSplit;
   const row = document.createElement('tr');
   row.innerHTML = `
     <td>${transaction.expense}</td>
