@@ -78,9 +78,9 @@ displayTransactions(transactions);
 function createTransaction(event) {
   const expense = document.getElementById('expense').value;
   const totalAmount = parseFloat(document.getElementById('totalAmount').value);
-  const spender = document.getElementById('spender').value.trim();
+  const spender = document.getElementById('spender').value.trim().toUpperCase();
   const consumers = document.getElementById('consumers').value.split(',').map(function(item) {
-    return item.trim();
+    return item.trim().toUpperCase();
   });
   var customSplit = document.getElementById('customSplit').value.split(',').map(i=>Number(i));
   if (!validateInput(expense, totalAmount, spender, consumers)) {
