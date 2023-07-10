@@ -49,7 +49,7 @@ class Transaction {
     this.customSplit = customSplit;
     this.split = 0;
     if (customSplit.length === 0) {
-      this.split = Math.round(( (totalAmount / (consumers.length + 1)) + Number.EPSILON) * 100) / 100
+      this.split = Math.round(( (totalAmount / (consumers.length)) + Number.EPSILON) * 100) / 100
       for (const consumer of consumers) {
         Transaction.db.insert(spender, consumer, this.split);
       }
@@ -78,13 +78,15 @@ displayTransactions(transactions);
 function createTransaction(event) {
   const expense = document.getElementById('expense').value;
   const totalAmount = parseFloat(document.getElementById('totalAmount').value);
-  const spender = document.getElementById('spender').value;
-  const consumers = document.getElementById('consumers').value.split(',');
+  const spender = document.getElementById('spender').value.trim();
+  const consumers = document.getElementById('consumers').value.split(',').map(function(item) {
+    return item.trim();
+  });
   var customSplit = document.getElementById('customSplit').value.split(',').map(i=>Number(i));
   if (!validateInput(expense, totalAmount, spender, consumers)) {
     return;
   }
-  if(customSplit.length === 1 && customSplit[0] === 0){
+  if(customSplit.length === 1 && customSplit[0] === 0){ //check wherether the array is [0]
     customSplit = [];
   }
   // console.log(expense,totalAmount, spender, consumers, customSplit);
