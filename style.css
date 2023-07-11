@@ -1,80 +1,89 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-  }
-  
-  h1 {
-    text-align: center;
-  }
-  
-  .form-container {
-    margin-bottom: 20px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input[type="text"],
-  input[type="number"] {
-    width: 100%;
-    padding: 5px;
-    margin-bottom: 10px;
-  }
-  
-  button {
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
-  
-  #summary-container {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-top: 20px;
-  }
-  
-  #summary-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  #summary-list li {
-    margin-bottom: 5px;
-  }
+body 
+{
+font-family: Arial, sans-serif;
+margin: 20px;
+}
 
-  #transactions-container {
-    border: 1px solid #ccc;
-    padding: 10px;
+h1 {
+text-align: center;
+}
+
+.form-container {
+margin-bottom: 20px;
+}
+
+label {
+display: block;
+margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="number"] {
+width: 100%;
+padding: 5px;
+margin-bottom: 10px;
+}
+
+button {
+padding: 10px;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+
+#summary-container {
+border: 1px solid #ccc;
+padding: 10px;
+margin-top: 20px;
+}
+
+#summary-list {
+list-style-type: none;
+padding: 0;
+}
+
+#summary-list li {
+margin-bottom: 5px;
+}
+
+#transactions-container {
+border: 1px solid #ccc;
+padding: 10px;
+}
+
+#transactions-table {
+width: 95%;
+border-collapse: collapse;
+margin-left: auto;
+margin-right: auto;
+}
+
+#transactions-table th,
+#transactions-table td {
+padding: 8px;
+border: 1px solid #ccc;
+}
+
+#transactions-table th {
+background-color: #f2f2f2;
+font-weight: bold;
+text-align: left;
+}
+
+#transactions-table td {
+text-align: center;
+}
+
+table{
+margin-bottom: 5px;
+}
+
+svg:hover {
+    width: 101%;
+    height: 101%;
+    fill:red;
+    filter: drop-shadow(2px 2px 2px rgba(247, 237, 50, 0.4));
   }
   
-  #transactions-table {
-    width: 95%;
-    border-collapse: collapse;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  #transactions-table th,
-  #transactions-table td {
-    padding: 8px;
-    border: 1px solid #ccc;
-  }
-  
-  #transactions-table th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-    text-align: left;
-  }
-  
-  #transactions-table td {
-    text-align: center;
-  }
-  
-  table{
-    margin-bottom: 5px;
-  }
 
  /* Dark theme */
 html {
