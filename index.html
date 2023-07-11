@@ -24,9 +24,10 @@
                 <label for="customSplit">Custom Split (optional):</label>
                 <input type="text" id="customSplit" placeholder="Comma-separated list of amounts">
 
-                <button onclick="createTransaction(event)">Create Transaction</button>
+                <button onclick="insertTransaction(event)">Create Transaction</button>
+                <input style="float:right" type='file' accept='text/csv' onchange='openFile(event)'>
             </form>
-            <input type='file' accept='text/csv' onchange='openFile(event)'>
+            
         </div>
 
         <div id="transactions-container">
@@ -36,16 +37,16 @@
                 <tr>
                     <th style="width:20%">Expense</th>
                     <th style="width:10%">Total Amount</th>
-                    <th style="width:20%">Spender</th>
+                    <th style="width:18%">Spender</th>
                     <th style="width:25%">Consumers</th>
                     <th style="width:25%">Split</th>
+                    <th style="width:2%;">Delete</th>
                 </tr>
             </thead>
             <tbody id="transactions-body"></tbody>
         </table>
-        <button onclick="displaySummary(transactions[0].getSummary())">Get Summary</button>
-        </div>
-
+        <button onclick="displaySummary()">Get Summary</button>
+        <button style="float:right" id="downloadTrans" onclick="download(csvMaker(transactions))">Download Transactions</button>
         <div id="summary-container">
             <h2>Summary</h2>
             <ul id="summary-list"></ul>
