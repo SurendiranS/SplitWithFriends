@@ -255,4 +255,3 @@ function openFile(event) {
   };
   reader.readAsText(input.files[0]);
 }
-}
