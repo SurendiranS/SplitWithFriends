@@ -127,7 +127,7 @@ function createTransaction(expense, TotalAmount, Spender, Consumers, CustomSplit
           customSplit.push((totalAmount-sum)/(consumers.length-len));
         }
     }
-    else{
+    else if((consumers.length === customSplit.length && sum !== totalAmount) || (consumers.length > customSplit.length && sum >= totalAmount) || (consumers.length < customSplit.length) ){
       alert('1. Custom Split entries must be less than or equal to Consumers.\n2. Sum of Custom Split cannot exceed Total Amount.');
       return;
     }
