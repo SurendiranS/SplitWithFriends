@@ -21,7 +21,7 @@
                 <label for="consumers">Consumers:</label>
                 <input type="text" id="consumers" placeholder="Comma-separated list of names" required>
 
-                <label for="customSplit">Custom Split (optional):</label>
+                <label for="customSplit">Custom Share (optional):</label>
                 <input type="text" id="customSplit" placeholder="Comma-separated list of amounts">
 
                 <button onclick="insertTransaction(event)">Create Transaction</button>
@@ -35,12 +35,12 @@
         <table id="transactions-table">
             <thead>
                 <tr>
-                    <th style="width: 2%;">S.No</th>
+                    <th style="width: 2%;">#</th>
                     <th style="width:20%">Expense</th>
                     <th style="width:10%">Total Amount</th>
-                    <th style="width:16%">Spender</th>
+                    <th style="width:18%">Spender</th>
                     <th style="width:25%">Consumers</th>
-                    <th style="width:25%">Split</th>
+                    <th style="width:25%">Share</th>
                     <th style="width:2%;">Delete</th>
                 </tr>
             </thead>
